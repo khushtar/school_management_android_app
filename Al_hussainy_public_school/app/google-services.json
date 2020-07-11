@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "29022588402",
+    "firebase_url": "https://alhussainypublicschool.firebaseio.com",
+    "project_id": "alhussainypublicschool",
+    "storage_bucket": "alhussainypublicschool.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:29022588402:android:122456ba251a8ca87e2f6b",
+        "android_client_info": {
+          "package_name": "khushtar.e.al_hussainy_public_school"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "29022588402-4uqh6v5o3t83mlv03i7q8is71jurdtie.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "khushtar.e.al_hussainy_public_school",
+            "certificate_hash": "e10542b1052d779eb247e078a54f894c3f0ed0a8"
+          }
+        },
+        {
+          "client_id": "29022588402-hll8q0p8sgafmfean1d1ssv7ime914va.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCw0J2677wgv8QOmd5uTmpKzbWHoHQCd_4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "29022588402-hll8q0p8sgafmfean1d1ssv7ime914va.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
