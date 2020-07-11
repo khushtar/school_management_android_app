@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -89,10 +91,12 @@ public class RegisterTeacherActivity extends AppCompatActivity {
         pd.setMessage("Please Wait");
         pd.show();
         mAuth.createUserWithEmailAndPassword(email,password)
-                .addOnCompleteListener(RegisterTeacherActivity.this, new OnCompleteListener<AuthResult>() {
+                .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+
+
                     @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
+                    public void onSuccess(AuthResult authResult) {
+
                             NewTeacher newUser=new NewTeacher();
                             newUser.setName(name);
                             newUser.setUsername(username);
@@ -102,24 +106,36 @@ public class RegisterTeacherActivity extends AppCompatActivity {
                             newUser.setPassword(password);
                             newUser.setMobile_no(mobileno);
 
-                            Toast.makeText(RegisterTeacherActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
-
                             FirebaseDatabase fdb=FirebaseDatabase.getInstance();
-                            //FirebaseUser user_id=FirebaseAuth.getInstance().getCurrentUser();
 
-                                fdb.getReference("School Data").child("Teacher").child(username).setValue(newUser);
+                            fdb.getReference("School Data").child("Teacher").child(username).setValue(newUser)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
 
-                            pd.dismiss();
-                            startActivity(new Intent(RegisterTeacherActivity.this,LoginActivity.class));
-                            finish();
+                                            if(task.isSuccessful()) {
+                                                pd.dismiss();
+                                                Toast.makeText(RegisterTeacherActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+                                                Intent intent=new Intent(RegisterTeacherActivity.this,MainActivity.class);
+
+                                                startActivity(intent);
+                                                finish();
+
+                                            }
+                                            else{
+                                                Toast.makeText(RegisterTeacherActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
 
                         }
-                        else{
-                            Toast.makeText(RegisterTeacherActivity.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
-                        }
-
-                    }
-                });
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                pd.dismiss();
+                Toast.makeText(RegisterTeacherActivity.this, "User Already Exist", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
