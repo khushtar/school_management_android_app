@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -39,8 +40,18 @@ public class LoginActivity extends AppCompatActivity {
             String email,password;
             email=edtUserEmail.getText().toString().trim();
             password=edtPassword.getText().toString().trim();
-            verifyUser(email,password);
+            if(TextUtils.isEmpty(email)){
+                Toast.makeText(LoginActivity.this, "Email required", Toast.LENGTH_SHORT).show();
+                edtUserEmail.requestFocus();
 
+            }
+            else if(TextUtils.isEmpty(password)){
+                Toast.makeText(LoginActivity.this, "Password required", Toast.LENGTH_SHORT).show();
+                edtPassword.requestFocus();
+            }
+            else {
+                verifyUser(email, password);
+            }
         });
 
     }
@@ -55,20 +66,19 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
+
                             FirebaseUser user = mAuth.getCurrentUser();
                             Intent intent=new Intent(LoginActivity.this,MainActivity.class);
                             intent.putExtra("currentUser",user);
                             pd.dismiss();
                             startActivity(intent);
-                           // updateUI(user);
+
                         } else {
                             pd.dismiss();
-                            // If sign in fails, display a message to the user.
+
 
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-                            //updateUI(null);
                         }
 
 
