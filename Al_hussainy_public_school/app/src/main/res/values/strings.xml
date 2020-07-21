@@ -64,5 +64,38 @@
     <string name="roll_no">Roll No</string>
     <string name="enter_students_details">Enter Student\'s Details</string>
     <string name="or">-------------------OR-----------------</string>
+    <string name="gender">M/F</string>
+    <string name="student_details">Student\'s Details</string>
+    <string name="fee_details">Fee Details</string>
+    <string name="attendance_details">Attendance Details</string>
+    <string name="last_paid_amt">Last Paid Amt.</string>
+    <string name="last_paid_date">Last Paid Date</string>
+    <string name="total_advance">Total Advance</string>
+    <string name="total_dues">Total Dues</string>
+    <string name="total_class">Total Class</string>
+    <string name="present">Present</string>
+    <string name="absent">Absent</string>
+    <string name="total_percentage">Total Percentage</string>
+    <string name="sign_up">Sign Up?</string>
+    <string name="already_user_sign_in">Already user. Sign in?</string>
+    <string name="registration_id">Registration Id</string>
+    <string name="share">Share</string>
+    <string name="about">About</string>
+    <string name="exit">Exit</string>
+    <string name="ahps">AHPS</string>
+    <string name="profile">Profile</string>
+    <string name="post">post</string>
+    <string name="about_us">
+        This application is developed for maintenance of our school data.
+        Also in the support of digitization.
+        Version 1.0.
+        Developer -> Md Khushtar Hussain,
+        Contact -> 8906518717.
+        Email -> khushtar.hussain.kh@gmail.com.
+        To give any suggestion for better performance you could contact with me via mailing in the email id given above.
+    </string>
+    <string name="marks_details">Marks Details</string>
+    <string name="sa1">SA1</string>
+    <string name="sa2">SA2</string>
 
 </resources>

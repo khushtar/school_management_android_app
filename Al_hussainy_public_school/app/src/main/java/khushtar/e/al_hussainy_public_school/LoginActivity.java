@@ -1,6 +1,5 @@
 package khushtar.e.al_hussainy_public_school;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
@@ -9,12 +8,10 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -22,7 +19,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText edtUserEmail,edtPassword;
     Button btnSubmit;
     private FirebaseAuth mAuth;
-
+    private TextView singUp;
     private ProgressDialog pd;
     protected static String MSG="khustar.e.ahps. UserName and Password";
 
@@ -35,6 +32,13 @@ public class LoginActivity extends AppCompatActivity {
         edtPassword=findViewById(R.id.edtLoginPassword);
         btnSubmit=findViewById(R.id.btnLoginSubmit);
         pd=new ProgressDialog(LoginActivity.this);
+        singUp=findViewById(R.id.login_signUp);
+
+        singUp.setOnClickListener((v)->{
+            startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+            finish();
+        });
+
 
         btnSubmit.setOnClickListener((view)->{
             String email,password;
@@ -61,28 +65,23 @@ public class LoginActivity extends AppCompatActivity {
         pd.show();
         mAuth = FirebaseAuth.getInstance();
         mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
 
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+                        intent.putExtra("currentUser",user);
+                        pd.dismiss();
+                        startActivity(intent);
 
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            Intent intent=new Intent(LoginActivity.this,MainActivity.class);
-                            intent.putExtra("currentUser",user);
-                            pd.dismiss();
-                            startActivity(intent);
+                    } else {
+                        pd.dismiss();
 
-                        } else {
-                            pd.dismiss();
-
-
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-
-
+                        Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                Toast.LENGTH_SHORT).show();
                     }
+
+
                 });
     }
 

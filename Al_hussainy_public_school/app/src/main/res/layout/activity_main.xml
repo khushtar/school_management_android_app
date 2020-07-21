@@ -6,19 +6,30 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@drawable/school_background5"
+        android:minHeight="?attr/actionBarSize"
+        app:menu="@menu/top_menu">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ahps"
+            android:textSize="30sp"
+            android:gravity="center"/>
+
+    </androidx.appcompat.widget.Toolbar>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/fragment_container"
+        android:layout_below="@+id/toolbar"
         android:layout_above="@id/bottom"/>
-    <Button
-        android:id="@+id/log_out"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/logout"
-        android:layout_alignEnd="@+id/fragment_container"
-        android:layout_above="@id/bottom"/>
+
 
 
     <com.google.android.material.appbar.AppBarLayout
